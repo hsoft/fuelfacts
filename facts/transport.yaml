@@ -1,0 +1,6 @@
+truck:
+    mileage:
+        gallons-per-thousand-ton-miles:
+            value: 18.2
+            source: http://cta.ornl.gov/vtmarketreport/pdf/chapter3_heavy_trucks.pdf
+            sourcenote: p. 4, table 25 (class 7)

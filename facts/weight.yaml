@@ -1,0 +1,6 @@
+gasoline:
+    density:
+        kilogram-per-liter:
+            value: 0.74
+            source: http://en.wikipedia.org/wiki/Gasoline#Density
+            sourcenote: mean value in range

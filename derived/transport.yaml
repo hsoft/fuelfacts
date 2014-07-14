@@ -1,0 +1,3 @@
+truck:
+  mileage:
+    liter-per-thousand-liter-km: {source: derived, value: 0.034888436215124816}
