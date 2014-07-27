@@ -1,0 +1,15 @@
+truck:
+    btu-per-ton-mile:
+        value: 4074
+        source: http://www.c2es.org/technology/factsheet/FreightTransportation
+
+rail:
+    btu-per-ton-mile:
+        value: 330
+        source: http://www.c2es.org/technology/factsheet/FreightTransportation
+
+ship:
+    btu-per-ton-mile:
+        value: 571
+        source: http://www.c2es.org/technology/factsheet/FreightTransportation
+

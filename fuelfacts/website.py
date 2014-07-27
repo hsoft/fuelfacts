@@ -6,16 +6,39 @@ from . import facts
 app = Flask(__name__)
 Bootstrap(app)
 
+def consumption(method, lmkm):
+    ratio = facts.freight_derived[method]['liter-per-liter-km']['value']
+    return lmkm * ratio
+
+def meansupplydist(region):
+    supplies = facts.supply[region]
+    totratio = sum(s['ratio'] for s in supplies)
+    return sum(s['distance'] * (s['ratio'] / totratio) for s in supplies)
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        liters = request.form['liters']
-        distance = request.form['km-from-distrib-point']
-        ratio = facts.transport_derived['truck']['mileage']['liter-per-thousand-liter-km']['value']
-        extra_fuel = (int(liters) * int(distance) * ratio) / 1000
-        msg = "Votre essence a nécessité %0.2f litres en plus pour arriver à votre réservoir" % extra_fuel
+        liters = int(request.form['liters'])
+        dist_refinery = int(request.form['km-from-distrib-point'])
+        dist_supply = int(meansupplydist('quebec'))
+        fuel1 = consumption('ship', liters * dist_supply)
+        fuel2 = consumption('truck', liters * dist_refinery)
+        consumption_data = [
+            [
+                "From the oil fields to the refinery",
+                dist_supply,
+                "Ship",
+                '%0.2f' % fuel1
+            ],
+            [
+                "From the refinery to the gas station",
+                dist_refinery,
+                "Truck",
+                '%0.2f' % fuel2
+            ],
+        ]
     else:
-        msg = None
+        consumption_data = None
 
-    return render_template('index.html', msg=msg)
+    return render_template('index.html', consumption_data=consumption_data)
 

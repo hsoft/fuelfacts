@@ -1,0 +1,21 @@
+quebec:
+    # gross approximation for simplicity. for now
+    -
+        # 6000km from Quebec City to Algiers.
+        name: africa
+        type: ship
+        distance: 6000
+        ratio: 0.5
+    -
+        # 7500km from Quebec City to Istanbul
+        name: russia
+        type: ship
+        distance: 7500
+        ratio: 0.3
+    -
+        # 5300km from Quebec City to Oslo
+        name: europe
+        type: ship
+        distance: 5300
+        ratio: 0.2
+

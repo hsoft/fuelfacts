@@ -1,0 +1,6 @@
+rail:
+  liter-per-liter-km: {source: derived, value: 4.889274261822352e-06}
+ship:
+  liter-per-liter-km: {source: derived, value: 8.459926071213827e-06}
+truck:
+  liter-per-liter-km: {source: derived, value: 6.0360313159588665e-05}

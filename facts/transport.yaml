@@ -4,3 +4,10 @@ truck:
             value: 18.2
             source: http://cta.ornl.gov/vtmarketreport/pdf/chapter3_heavy_trucks.pdf
             sourcenote: p. 4, table 25 (class 7)
+tanker:
+    mileage:
+        gallons-per-thousand-ton-miles:
+            value: 3.45
+            source: http://www.eagle.org/eagleExternalPortalWEB/ShowProperty/BEA%20Repository/References/Capability%20Brochures/ShipEnergyEfficiency
+            sourcenote: p. 7, figure 1. We use the best figure (biggest tanker). x1.15 because it's nautic miles
+
