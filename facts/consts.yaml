@@ -1,0 +1,21 @@
+gasoline:
+    density:
+        kilogram-per-liter:
+            value: 0.74
+            source: http://en.wikipedia.org/wiki/Gasoline#Density
+            sourcenote: mean value in range
+diesel:
+    kilogram-per-liter:
+        value: 0.74
+        source: http://en.wikipedia.org/wiki/Gasoline#Density
+        sourcenote: mean value in range
+
+    btu-per-gallon:
+        value: 129500
+        source: http://en.wikipedia.org/wiki/Gasoline_gallon_equivalent
+
+natural-gas:
+    btu-per-cubic-foot:
+        value: 1000
+        source: http://en.wikipedia.org/wiki/Natural_gas#Energy_content.2C_statistics.2C_and_pricing
+

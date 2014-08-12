@@ -1,15 +1,18 @@
 import yaml
 from pint import UnitRegistry
+
+from .util import unsource
+
 ureg = UnitRegistry()
 
 def main():
-    diesel = yaml.load(open('facts/diesel.yaml', 'rb'))
-    diesel_bpg = diesel['btu-per-gallon']['value'] * (ureg.btu / ureg.gallon)
-    diesel_kpl = diesel['kilogram-per-liter']['value'] * (ureg.kg / ureg.l)
-    freight = yaml.load(open('facts/freight.yaml', 'rb'))
+    consts = unsource(yaml.load(open('facts/consts.yaml', 'rb')))
+    diesel_bpg = consts['diesel']['btu-per-gallon'] * (ureg.btu / ureg.gallon)
+    diesel_kpl = consts['diesel']['kilogram-per-liter'] * (ureg.kg / ureg.l)
+    freight = unsource(yaml.load(open('facts/freight.yaml', 'rb')))
     freight_bptm = {}
     for ftype, data in freight.items():
-        freight_bptm[ftype] = data['btu-per-ton-mile']['value'] * (ureg.btu / (ureg.ton * ureg.mile))
+        freight_bptm[ftype] = data['btu-per-ton-mile'] * (ureg.btu / (ureg.ton * ureg.mile))
     freight_lplkm = {}
     for ftype, bptm in freight_bptm.items():
         print(ftype)
