@@ -7,7 +7,7 @@ app = Flask(__name__)
 Bootstrap(app)
 
 def consumption(method, lmkm):
-    ratio = facts.freight_derived[method]['liter-per-liter-km']['value']
+    ratio = facts.freight[method]['liter-per-liter-km']
     return lmkm * ratio
 
 def meansupplydist(region):
@@ -22,7 +22,8 @@ def index():
         dist_refinery = int(request.form['km-from-distrib-point'])
         dist_supply = int(meansupplydist('quebec'))
         fuel1 = consumption('ship', liters * dist_supply)
-        fuel2 = consumption('truck', liters * dist_refinery)
+        fuel2 = facts.refinery['gasoline']['liter-consumed-per-liter-produced'] * liters
+        fuel3 = consumption('truck', liters * dist_refinery)
         consumption_data = [
             [
                 "From the oil fields to the refinery",
@@ -31,10 +32,16 @@ def index():
                 '%0.2f' % fuel1
             ],
             [
+                "Refinery's energy consumption",
+                "-",
+                "-",
+                '%0.2f' % fuel2
+            ],
+            [
                 "From the refinery to the gas station",
                 dist_refinery,
                 "Truck",
-                '%0.2f' % fuel2
+                '%0.2f' % fuel3
             ],
         ]
     else:
