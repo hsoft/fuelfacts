@@ -22,6 +22,8 @@ clear by:
 * Having a source for every constant fact.
 * Having an explanation page for each calculation.
 
+There's an instance of the project running at <http://fuelfacts.hardcoded.net>
+
 # Installation
 
 All you need is Python 3.4. Then, you can do this:
