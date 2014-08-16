@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+{% filter markdown %}
+# About Fuelfacts
+
+Hi, my name is Virgil Dupras. So the other day, I'm sitting on my couch and I ask myself:
+
+— How much fuel was necessary to take oil from its origin up to one's car?
+
+— It depends on many factors, Mr. Obvious answers. Where the oil comes from, its means of
+transportation, its crude quality, the refinery's efficiency...
+
+— Alright, alright, so what about the fuel from that station over there? How many liters?
+
+— We can't tell without access to some private information, such as the station's suppliers,
+his suppliers freight routes, the refineries supply sources...
+
+— Alright, *alright!* Can't I at least get some *approximations* based on public information?
+
+— I guess so, but it would be some work. There's lots of information to gather from different
+sources, put together...
+
+And thus, there's me, knowing nothing about oil, freight, ton-miles, writing this app so I can
+get an answer.
+
+# How it works
+
+This app was designed to get an approximate answer as fast as possible and refine that
+approximation over time. The driving idea behind this is *perfectibility*. I don't have much
+knowledge about this problem domain, but I can mash some numbers together and get something that
+looks ok. However, I hope that with time, people with better knowledge and or access to better
+datasets will improve it over time and that's why I always make sure that:
+
+1. All steps of the calculations are documented.
+2. Every numbers involved in calculations are documented with a source URL.
+
+So, are calculations in this app grossly inexact? *Yes!* Can you do something about it?
+*Heck yeah!* If you see anything wrong in:
+
+1. The logic of a calculation.
+2. The reliability of a source.
+3. The completeness of a source.
+
+please [open an issue in Github](https://github.com/hsoft/fuelfacts)!
+{% endfilter %}
+</div>
+{% endblock %}
+

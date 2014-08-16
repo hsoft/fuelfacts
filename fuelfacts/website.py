@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
+from flaskext.markdown import Markdown
 
 from . import facts
 
 app = Flask(__name__)
 Bootstrap(app)
+Markdown(app)
 
 def consumption(method, lmkm):
     ratio = facts.freight[method]['liter-per-liter-km']
@@ -64,4 +66,8 @@ def refining():
     lines = [(desc, link, fmtnumber(value)) for desc, link, value in lines]
     title = "Calculation details for refinery energy consumption"
     return render_template('calc_details.html', title=title, calculation_lines=lines)
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 

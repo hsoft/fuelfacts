@@ -2,3 +2,5 @@ pyyaml
 pint
 flask
 flask-bootstrap
+flask-markdown
+
