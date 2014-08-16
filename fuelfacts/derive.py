@@ -114,7 +114,7 @@ def compute_refineries_consumption_per_liter(consts):
         ],
         [ "Yield of a liter of diesel in BTU",
             None,
-            (consts['diesel']['btu-per-gallon']['value'] * ureg.gallon).to(ureg.l).magnitude
+            (consts['diesel']['btu-per-gallon']['value'] * (ureg.btu / ureg.gallon)).to(ureg.btu / ureg.l).magnitude
         ],
         [ "Energy spent per liters produced (liters of diesel)",
             None,

@@ -14,5 +14,5 @@ refinery-energy-consumption:
 - [Energy spent per liters produced (BTU), null, 1272.1506889326868]
 - [Yield of a gallon of diesel in BTU, 'http://en.wikipedia.org/wiki/Gasoline_gallon_equivalent',
   129500]
-- [Yield of a liter of diesel in BTU, null, 490210.8260280002]
+- [Yield of a liter of diesel in BTU, null, 34210.280780380206]
 - [Energy spent per liters produced (liters of diesel), null, 0.03718621010740936]
