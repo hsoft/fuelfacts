@@ -71,13 +71,16 @@ def compute_refineries_consumption_per_liter(consts):
     def eialink(serie_id):
         return 'http://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=%s&f=A' % serie_id
 
+    def convlink(amount, unit1, unit2):
+        return 'https://www.google.ca/search?q=%d %s in %s' % (amount, unit1, unit2)
+
     calculation_lines = [
         [ "US 2013 total refinery production (Barrels)",
             eialink('MTTRX_NUS_1'),
             prod_all.magnitude
         ],
         [ "US 2013 total refinery production (Liters)",
-            None,
+            convlink(prod_all.magnitude, 'oil barrels', 'liters'),
             prod_all_liter.magnitude
         ],
         [ "US 2013 total refinery electricity consumption (Kwh)",
@@ -85,7 +88,7 @@ def compute_refineries_consumption_per_liter(consts):
             con_elec.magnitude
         ],
         [ "US 2013 total refinery electricity consumption (BTU)",
-            None,
+            convlink(con_elec.magnitude, 'kwh', 'btu'),
             con_elec_btu.magnitude
         ],
         [ "US 2013 total refinery natural gas consumption (Million cubic feet)",
@@ -113,7 +116,7 @@ def compute_refineries_consumption_per_liter(consts):
             consts['diesel']['btu-per-gallon']['value']
         ],
         [ "Yield of a liter of diesel in BTU",
-            None,
+            convlink(consts['diesel']['btu-per-gallon']['value'], 'btu per gallon', 'btu per liter'),
             (consts['diesel']['btu-per-gallon']['value'] * (ureg.btu / ureg.gallon)).to(ureg.btu / ureg.l).magnitude
         ],
         [ "Energy spent per liters produced (liters of diesel)",

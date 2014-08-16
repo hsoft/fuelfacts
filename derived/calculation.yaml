@@ -1,10 +1,12 @@
 refinery-energy-consumption:
 - [US 2013 total refinery production (Barrels), 'http://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=MTTRX_NUS_1&f=A',
   4435221000]
-- [US 2013 total refinery production (Liters), null, 705143789197.8594]
+- [US 2013 total refinery production (Liters), 'https://www.google.ca/search?q=4435221000
+    oil barrels in liters', 705143789197.8594]
 - [US 2013 total refinery electricity consumption (Kwh), 'http://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=8_NA_8FE0_NUS_K&f=A',
   46078000]
-- [US 2013 total refinery electricity consumption (BTU), null, 157224662.1712693]
+- [US 2013 total refinery electricity consumption (BTU), 'https://www.google.ca/search?q=46078000
+    kwh in btu', 157224662.1712693]
 - [US 2013 total refinery natural gas consumption (Million cubic feet), 'http://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=8_NA_8FN0_NUS_2&f=A',
   897049000000]
 - [Natural gas energy yield per cubic foot (BTU), 'http://en.wikipedia.org/wiki/Natural_gas#Energy_content.2C_statistics.2C_and_pricing',
@@ -14,5 +16,6 @@ refinery-energy-consumption:
 - [Energy spent per liters produced (BTU), null, 1272.1506889326868]
 - [Yield of a gallon of diesel in BTU, 'http://en.wikipedia.org/wiki/Gasoline_gallon_equivalent',
   129500]
-- [Yield of a liter of diesel in BTU, null, 34210.280780380206]
+- [Yield of a liter of diesel in BTU, 'https://www.google.ca/search?q=129500 btu per
+    gallon in btu per liter', 34210.280780380206]
 - [Energy spent per liters produced (liters of diesel), null, 0.03718621010740936]
