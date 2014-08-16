@@ -15,6 +15,12 @@ def meansupplydist(region):
     totratio = sum(s['ratio'] for s in supplies)
     return sum(s['distance'] * (s['ratio'] / totratio) for s in supplies)
 
+def fmtnumber(n):
+    if n < 100:
+        return '{:0.3f}'.format(n)
+    else:
+        return '{:,}'.format(int(n))
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -29,23 +35,33 @@ def index():
                 "From the oil fields to the refinery",
                 dist_supply,
                 "Ship",
-                '%0.2f' % fuel1
+                '%0.2f' % fuel1,
+                None,
             ],
             [
                 "Refinery's energy consumption",
                 "-",
                 "-",
-                '%0.2f' % fuel2
+                '%0.2f' % fuel2,
+                '/refining',
             ],
             [
                 "From the refinery to the gas station",
                 dist_refinery,
                 "Truck",
-                '%0.2f' % fuel3
+                '%0.2f' % fuel3,
+                None,
             ],
         ]
     else:
         consumption_data = None
 
     return render_template('index.html', consumption_data=consumption_data)
+
+@app.route('/refining')
+def refining():
+    lines = facts.calculation['refinery-energy-consumption']
+    lines = [(desc, link, fmtnumber(value)) for desc, link, value in lines]
+    title = "Calculation details for refinery energy consumption"
+    return render_template('calc_details.html', title=title, calculation_lines=lines)
 

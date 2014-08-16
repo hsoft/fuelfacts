@@ -9,12 +9,12 @@ ureg = UnitRegistry()
 def btu_to_liter(consts, btu):
     """Returns the number of liters of diesel required to give `btu`
     """
-    diesel_bpg = consts['diesel']['btu-per-gallon'] * (ureg.btu / ureg.gallon)
+    diesel_bpg = consts['diesel']['btu-per-gallon']['value'] * (ureg.btu / ureg.gallon)
     gallon = btu / diesel_bpg
     return gallon.to(ureg.l)
 
 def compute_freight_consumption_per_liter(consts):
-    diesel_kpl = consts['diesel']['kilogram-per-liter'] * (ureg.kg / ureg.l)
+    diesel_kpl = consts['diesel']['kilogram-per-liter']['value'] * (ureg.kg / ureg.l)
     freight = unsource(yaml.load(open('facts/freight.yaml', 'rb')))
     freight_bptm = {}
     for ftype, data in freight.items():
@@ -40,7 +40,7 @@ def compute_freight_consumption_per_liter(consts):
         yaml.dump(freight_lplkm, fp)
 
 def compute_refineries_consumption_per_liter(consts):
-    natgas_bpcf = consts['natural-gas']['btu-per-cubic-foot'] * (ureg.btu / (ureg.foot ** 3))
+    natgas_bpcf = consts['natural-gas']['btu-per-cubic-foot']['value'] * (ureg.btu / (ureg.foot ** 3))
     WANTED_EIA_SERIES = [
         'PET.MTTRX_NUS_1.A', # net US refineries production of everything, 1000s of barrels
         'PET.MGFRX_NUS_1.A', # net US refineries production of gasoline, 1000s of barrels
@@ -67,9 +67,67 @@ def compute_refineries_consumption_per_liter(consts):
     }}}
     with open('derived/refinery.yaml', 'wt') as fp:
         yaml.dump(refinery_lcplpi, fp)
+    # Now, let's record a detail of that calculation
+    def eialink(serie_id):
+        return 'http://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=%s&f=A' % serie_id
+
+    calculation_lines = [
+        [ "US 2013 total refinery production (Barrels)",
+            eialink('MTTRX_NUS_1'),
+            prod_all.magnitude
+        ],
+        [ "US 2013 total refinery production (Liters)",
+            None,
+            prod_all_liter.magnitude
+        ],
+        [ "US 2013 total refinery electricity consumption (Kwh)",
+            eialink('8_NA_8FE0_NUS_K'),
+            con_elec.magnitude
+        ],
+        [ "US 2013 total refinery electricity consumption (BTU)",
+            None,
+            con_elec_btu.magnitude
+        ],
+        [ "US 2013 total refinery natural gas consumption (Million cubic feet)",
+            eialink('8_NA_8FN0_NUS_2'),
+            con_natgas.magnitude
+        ],
+        [ "Natural gas energy yield per cubic foot (BTU)",
+            consts['natural-gas']['btu-per-cubic-foot']['source'],
+            consts['natural-gas']['btu-per-cubic-foot']['value']
+        ],
+        [ "US 2013 total refinery natural gas consumption (BTU)",
+            None,
+            con_natgas_btu.magnitude
+        ],
+        [ "Electricity + natural gas BTU",
+            None,
+            tot_btu.magnitude
+        ],
+        [ "Energy spent per liters produced (BTU)",
+            None,
+            con_btu_per_liter.magnitude
+        ],
+        [ "Yield of a gallon of diesel in BTU",
+            consts['diesel']['btu-per-gallon']['source'],
+            consts['diesel']['btu-per-gallon']['value']
+        ],
+        [ "Yield of a liter of diesel in BTU",
+            None,
+            (consts['diesel']['btu-per-gallon']['value'] * ureg.gallon).to(ureg.l).magnitude
+        ],
+        [ "Energy spent per liters produced (liters of diesel)",
+            None,
+            con_diesel_liter_per_liter.magnitude
+        ],
+
+    ]
+    calculations = {'refinery-energy-consumption': calculation_lines}
+    with open('derived/calculation.yaml', 'wt') as fp:
+        yaml.dump(calculations, fp)
 
 def main():
-    consts = unsource(yaml.load(open('facts/consts.yaml', 'rb')))
+    consts = yaml.load(open('facts/consts.yaml', 'rb'))
     compute_freight_consumption_per_liter(consts)
     compute_refineries_consumption_per_liter(consts)
 
