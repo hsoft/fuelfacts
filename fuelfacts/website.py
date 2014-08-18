@@ -13,7 +13,7 @@ def consumption(method, lmkm):
     return lmkm * ratio
 
 def meansupplydist(region):
-    supplies = facts.supply[region]
+    supplies = facts.supply[region]['value']
     totratio = sum(s['ratio'] for s in supplies)
     return sum(s['distance'] * (s['ratio'] / totratio) for s in supplies)
 
@@ -38,7 +38,7 @@ def index():
                 dist_supply,
                 "Ship",
                 '%0.2f' % fuel1,
-                None,
+                '/freight',
             ],
             [
                 "Refinery's energy consumption",
@@ -52,7 +52,7 @@ def index():
                 dist_refinery,
                 "Truck",
                 '%0.2f' % fuel3,
-                None,
+                '/freight',
             ],
         ]
     else:
@@ -66,6 +66,18 @@ def refining():
     lines = [(desc, link, fmtnumber(value)) for desc, link, value in lines]
     title = "Calculation details for refinery energy consumption"
     return render_template('calc_details.html', title=title, calculation_lines=lines)
+
+@app.route('/freight')
+def freight():
+    lines = facts.calculation['freight-consumption']
+    lines = [(desc, link, fmtnumber(value)) for desc, link, value in lines]
+    title = "Calculation details for freight consumption"
+    return render_template(
+        'calc_details.html',
+        title=title,
+        calculation_lines=lines,
+        route=facts.supply['quebec'],
+    )
 
 @app.route('/about')
 def about():

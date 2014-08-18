@@ -12,6 +12,28 @@
         </tr>
         {% endfor %}
     </table>
+    {% if route %}
+    <h1>Supply route for Quebec province</h1>
+    <p>Source: <a href="{{ route.source }}">{{ route.source }}</a></p>
+    <p>Note: Very, <i>very</i> gross approximates until I get better data sources.</p>
+    <p>"Proportion" is the proportion of crude oil that comes from this source</p>
+    <table class="table">
+        <tr>
+            <th>Provenance</th>
+            <th>Freight type</th>
+            <th>Distance (KM)</th>
+            <th>Proportion</th>
+        </tr>
+        {% for line in route.value %}
+        <tr>
+            <td>{{ line.name }}</td>
+            <td>{{ line.type }}</td>
+            <td>{{ line.distance }}</td>
+            <td>{{ line.ratio }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
 </div>
 {% endblock %}
 

@@ -1,3 +1,26 @@
+freight-consumption:
+- [Yield of a gallon of diesel in BTU, 'http://en.wikipedia.org/wiki/Gasoline_gallon_equivalent',
+  129500]
+- [Diesel density (kilogram per liter), 'http://en.wikipedia.org/wiki/Gasoline#Density',
+  0.74]
+- [Typical BTU per ton-mile for 'truck', 'http://www.c2es.org/technology/factsheet/FreightTransportation',
+  4074]
+- ['... in BTU per kilogram-kilometer', null, 2.79046386646109]
+- ['... in BTU per diesel-liter-kilometer (using diesel density)', null, 2.0649432611812064]
+- ['... in diesel-liter per thousand-diesel-liter-kilometer (using diesel BTU yield)',
+  null, 0.06036031315958867]
+- [Typical BTU per ton-mile for 'ship', 'http://www.c2es.org/technology/factsheet/FreightTransportation',
+  571]
+- ['... in BTU per kilogram-kilometer', null, 0.3911033057803835]
+- ['... in BTU per diesel-liter-kilometer (using diesel density)', null, 0.2894164462774838]
+- ['... in diesel-liter per thousand-diesel-liter-kilometer (using diesel BTU yield)',
+  null, 0.008459926071213828]
+- [Typical BTU per ton-mile for 'rail', 'http://www.c2es.org/technology/factsheet/FreightTransportation',
+  330]
+- ['... in BTU per kilogram-kilometer', null, 0.22603168285030922]
+- ['... in BTU per diesel-liter-kilometer (using diesel density)', null, 0.16726344530922882]
+- ['... in diesel-liter per thousand-diesel-liter-kilometer (using diesel BTU yield)',
+  null, 0.004889274261822352]
 refinery-energy-consumption:
 - [US 2013 total refinery production (Barrels), 'http://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=MTTRX_NUS_1&f=A',
   4435221000]
